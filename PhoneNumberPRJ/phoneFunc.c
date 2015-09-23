@@ -62,14 +62,15 @@ void ShowAllData(void)
 기능 찾기
 반환 phoneData
 */
-phoneData* FindData()
+phoneData* FindData() //메모리 유수. 폐기
 {
 	int i = 0;
 	char nameforsearch[NAME_LEN];
-	phoneData trash;
+	phoneData* trash;
+	trash = (phoneData*)malloc(sizeof(phoneData));
 	// trash.name = "none"; trash.phoneNum = "none";
-	strcpy(trash.name, "none");
-	strcpy(trash.phoneNum, "none");
+	strcpy(trash->name, "none");
+	strcpy(trash->phoneNum, "none");
 
 	fputs("이름 입력: ", stdout);
 	gets(nameforsearch);
@@ -84,7 +85,7 @@ phoneData* FindData()
 	if (i == numOfData)
 	{
 		puts("해당 이름없음");
-		return &trash; //의미없는 정보반환
+		return trash; //의미없는 정보반환
 	}
 }
 
@@ -95,7 +96,26 @@ phoneData* FindData()
 void SearchData()
 {
 	//ShowPhoneInfo( FindData() );
-	ShowPhoneInfoByPtr( FindData() );
+	int i = 0;
+	char nameforsearch[NAME_LEN];
+
+	fputs("이름 입력: ", stdout);
+	gets(nameforsearch);
+
+	for (i = 0; i < numOfData; i++)
+	{
+		if (strcmp(nameforsearch, phoneList[i]->name) == 0)
+		{
+			ShowPhoneInfoByPtr(phoneList[i]);
+			//동명이인 없으므로 바로리턴			
+			return;
+		}
+	}
+	if (i == numOfData)
+	{
+		puts("해당 이름없음");
+		return;
+	}
 }
 
 /* 함수 void DeleteData()

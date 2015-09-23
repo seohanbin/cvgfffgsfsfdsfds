@@ -20,6 +20,7 @@ Last modified 2015
 #include "screenOut.h"
 #include "phoneFunc.h"
 
+
 enum{INPUT=1, SHOWALL, SEARCH, DELETE, QUIT};
 
 /* function : int main (void)
@@ -50,7 +51,6 @@ int main(void)
 			break;
 
 		case SEARCH:
-			
 			SearchData();
 			system("pause");
 			break;
