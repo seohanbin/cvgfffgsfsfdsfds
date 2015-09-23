@@ -12,6 +12,7 @@
 
 void ShowMenu(void);
 void ShowPhoneInfo(phoneData phone);
+void ShowPhoneInfoByPtr(phoneData* pPhone);
 
 #endif
 /* end of file */

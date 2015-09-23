@@ -11,6 +11,9 @@
 
 void InputPhoneData(void);
 void ShowAllData(void);
+phoneData* FindData();
+void SearchData();
+void DeleteData();
 
 
 

@@ -12,7 +12,7 @@
 #define LIST_NUM   100
 
 int numOfData = 0;
-phoneData phoneList[LIST_NUM];
+phoneData* phoneList[LIST_NUM];
 
 /* 함    수: void InputPhoneData(void)
 * 기    능: 전화번호 관련 데이터 입력 받아서 저장.
@@ -33,7 +33,8 @@ void InputPhoneData(void)
 	printf("이름: "); gets(data.name);
 	printf("전번: "); gets(data.phoneNum); 
 
-	phoneList[numOfData] = data;
+	phoneList[numOfData] = (phoneData*)malloc(sizeof(phoneData));
+	*phoneList[numOfData] = data;
 	numOfData++;
 
 	puts("입력완료");
@@ -50,7 +51,8 @@ void ShowAllData(void)
 	int i = 0;
 	for ( i = 0; i < numOfData; i++)
 	{
-		ShowPhoneInfo(phoneList[i]);
+		//ShowPhoneInfo(phoneList[i]);
+		ShowPhoneInfoByPtr(phoneList[i]);
 	}
 
 	printf("출력끝. 자료총수: %d\n",numOfData);
@@ -60,7 +62,7 @@ void ShowAllData(void)
 기능 찾기
 반환 phoneData
 */
-phoneData FindData()
+phoneData* FindData()
 {
 	int i = 0;
 	char nameforsearch[NAME_LEN];
@@ -74,7 +76,7 @@ phoneData FindData()
 
 	for ( i = 0; i < numOfData; i++)
 	{
-		if (strcmp(nameforsearch, phoneList[i].name) == 0)
+		if (strcmp(nameforsearch, phoneList[i]->name) == 0)
 		{
 			return phoneList[i]; //동명이인 없으므로 바로리턴
 		}
@@ -82,7 +84,7 @@ phoneData FindData()
 	if (i == numOfData)
 	{
 		puts("해당 이름없음");
-		return trash; //의미없는 정보반환
+		return &trash; //의미없는 정보반환
 	}
 }
 
@@ -92,7 +94,8 @@ phoneData FindData()
 */
 void SearchData()
 {
-	ShowPhoneInfo( FindData() );
+	//ShowPhoneInfo( FindData() );
+	ShowPhoneInfoByPtr( FindData() );
 }
 
 /* 함수 void DeleteData()
@@ -111,7 +114,7 @@ void DeleteData()
 
 	for ( i = 0; i < numOfData; i++)
 	{
-		if ( strcmp(nameforsearch, phoneList[i].name) == 0)
+		if ( strcmp(nameforsearch, phoneList[i]->name) == 0)
 		{
 			numOfData--;
 			for (; i < numOfData; i++)

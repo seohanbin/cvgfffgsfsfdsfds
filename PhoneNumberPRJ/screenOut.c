@@ -41,4 +41,17 @@ void ShowPhoneInfo(phoneData phone)
 	printf("┗━━━━━━━━━━━━━━━━ \n\n");
 }
 
+/*fn: void ShowPhoneInfoByPtr(phoneData* pPhone)
+role: show phone ptr
+return: 
+*/
+
+void ShowPhoneInfoByPtr(phoneData* pPhone)
+{
+	printf("┏━━━━━PTR━━━━━━━━━ \n");
+	printf("┃ ▶ 이름: %s \n", pPhone->name);
+	printf("┃ ▶ 전화번호: %s \n", pPhone->phoneNum);
+	printf("┗━━━━━━━━━━━━━━━━ \n\n");
+}
+
 /*end of file*/
