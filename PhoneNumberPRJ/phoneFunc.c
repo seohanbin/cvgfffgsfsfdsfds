@@ -108,9 +108,9 @@ phoneData* FindData() //메모리 유수. 폐기
 */
 void SearchData()
 {
-	//ShowPhoneInfo( FindData() );
 	int i = 0;
 	char nameforsearch[NAME_LEN];
+	int index = 0;
 
 	fputs("이름 입력: ", stdout);
 	gets(nameforsearch);
@@ -120,15 +120,16 @@ void SearchData()
 		if (strcmp(nameforsearch, phoneList[i]->name) == 0)
 		{
 			ShowPhoneInfoByPtr(phoneList[i]);
-			//동명이인 없으므로 바로리턴			
-			return;
+			index++;
 		}
 	}
-	if (i == numOfData)
+
+	if (index == 0)//예외
 	{
 		puts("해당 이름없음");
 		return;
 	}
+	printf("동일인: %d\n", index);
 }
 
 /* 함수 void DeleteData()
