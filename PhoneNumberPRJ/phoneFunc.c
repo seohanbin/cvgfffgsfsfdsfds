@@ -22,6 +22,7 @@ phoneData* phoneList[LIST_NUM];
 void InputPhoneData(void)
 {//구현
 	phoneData data;
+	int i;
 
 	if (numOfData >=LIST_NUM)
 	{
@@ -32,6 +33,18 @@ void InputPhoneData(void)
 
 	printf("이름: "); gets(data.name);
 	printf("전번: "); gets(data.phoneNum); 
+
+
+	for ( i = 0; i < numOfData; i++)
+	{
+		if (strcmp(data.name, phoneList[i]->name) == 0 && strcmp(data.phoneNum, phoneList[i]->phoneNum) == 0)
+		{
+			puts("이미 입력된 데이터입니다");
+			system("pause");
+			return;
+		}
+	}
+
 
 	phoneList[numOfData] = (phoneData*)malloc(sizeof(phoneData));
 	*phoneList[numOfData] = data;
@@ -87,7 +100,7 @@ phoneData* FindData() //메모리 유수. 폐기
 		puts("해당 이름없음");
 		return trash; //의미없는 정보반환
 	}
-}
+}//폐기
 
 /*함수 void SearchData()
 기능 찾아출력
@@ -126,7 +139,10 @@ void SearchData()
 void DeleteData()
 {
 	int i = 0;
-	int switcher = 0;
+
+	int delindex[LIST_NUM];
+	int index = 0;
+	int deltarget;
 
 	char nameforsearch[NAME_LEN];
 	printf("삭제할 이름: ");
@@ -134,20 +150,58 @@ void DeleteData()
 
 	for ( i = 0; i < numOfData; i++)
 	{
-		if ( strcmp(nameforsearch, phoneList[i]->name) == 0)
+		if (strcmp(nameforsearch, phoneList[i]->name) == 0)
 		{
-			numOfData--;
-			for (; i < numOfData; i++)
-			{
-				phoneList[i] = phoneList[i + 1];
-			}
-			puts("삭제완료");
-			return;
+			delindex[index] = i;
+			index++;
+		}
+	}
+	index--;//1개일때 마지막 인덱스를 최초(0) 인덱스로
+
+	if (index==0)//결과1개
+	{
+		free(phoneList[delindex[index]]);//메모리 유수 방지
+		for (i = delindex[index]; i < numOfData; i++)
+		{
+			phoneList[i] = phoneList[i + 1];
+		}
+		puts("삭제완료");
+		numOfData--;
+		return;
+	}
+	
+	else if (index > 0)//결과 다수
+	{
+
+		for ( i = 0; i <= index; i++)
+		{
+			printf("삭제대상번호: %d\n", i + 1);
+			ShowPhoneInfoByPtr(phoneList[delindex[i]]);
+		}
+		fputs("삭제대상 선택: ", stdout);
+		scanf("%d", &deltarget);
+		deltarget--;//index로 쓰기 위함
+		while (getchar() != '\n');
+		
+
+
+		free(phoneList[delindex[deltarget]]);//메모리 유수 방지
+		
+		for (i = delindex[deltarget]; i < numOfData; i++)
+		{
+			phoneList[i] = phoneList[i + 1];
 		}
 
+
+		puts("삭제완료");
+		numOfData--;
+		return;
 	}
-	puts("해당이름없음");
-	return;
+	else//결과 없음
+	{
+		puts("해당이름없음");
+		return;
+	}
 
 }
 
