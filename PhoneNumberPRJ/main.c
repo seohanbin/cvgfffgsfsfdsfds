@@ -31,6 +31,7 @@ return : 0 if normal termination
 int main(void)
 {
 	int inputMenu = 0;
+	LoadDataFromFile();
 
 	while (1)
 	{
@@ -62,6 +63,7 @@ int main(void)
 
 		if (inputMenu==QUIT)
 		{
+			StoreDataToFile();
 			puts("--end--");
 			break;
 		}

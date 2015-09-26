@@ -203,7 +203,54 @@ void DeleteData()
 		puts("해당이름없음");
 		return;
 	}
+	
+}
 
+
+/*fn void StoreDataToFile()
+role before exit save data
+return  void
+*/
+void StoreDataToFile()
+{
+	int i;
+	FILE* fp = fopen("whitepages.dat", "wb");
+	
+	fwrite(&numOfData, sizeof(int), 1, fp);
+	for ( i = 0; i < numOfData; i++)
+	{
+		fwrite(phoneList[i], sizeof(phoneData), 1, fp);
+		free(phoneList[i]);
+	}
+	
+	fclose(fp);
+	puts("리스트 저장");
+	system("pause");
+}
+
+void LoadDataFromFile()
+{
+	int i;
+	FILE* fp;
+	fp = fopen("whitepages.dat", "rb");
+
+	if (fp==NULL)
+	{
+		puts("저장된 파일 없음");
+		system("pause");
+		return;
+	}
+
+	fread(&numOfData, sizeof(int), 1, fp);
+	for (i = 0; i < numOfData; i++)
+	{
+		phoneList[i] = (phoneData*)malloc(sizeof(phoneData));
+		fread(phoneList[i], sizeof(phoneData), 1, fp);
+	}
+
+	fclose(fp);
+	puts("로드됨");
+	system("pause");
 }
 
 /* end of file */

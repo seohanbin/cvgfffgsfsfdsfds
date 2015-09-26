@@ -14,6 +14,8 @@ void ShowAllData(void);
 phoneData* FindData();
 void SearchData();
 void DeleteData();
+void StoreDataToFile();
+void LoadDataFromFile();
 
 
 
