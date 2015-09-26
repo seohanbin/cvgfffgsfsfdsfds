@@ -44,10 +44,12 @@ int main(void)
 		{
 		case INPUT:
 			InputPhoneData();
+			StoreDataToFile();
 			break;
 
 		case SHOWALL:
 			ShowAllData();
+			StoreDataToFile();
 			system("pause");
 			break;
 
@@ -58,17 +60,19 @@ int main(void)
 
 		case EDIT:
 			ChangePhoneData();
+			StoreDataToFile();
 			system("pause");
 			break;
 
 		case DELETE:
 			DeleteData();
+			StoreDataToFile();
 			system("pause");
 		}
 
 		if (inputMenu==QUIT)
 		{
-			StoreDataToFile();
+			//puts(" 저장완료"); //필요액션이후바로바로저장됨..
 			puts("--end--");
 			break;
 		}

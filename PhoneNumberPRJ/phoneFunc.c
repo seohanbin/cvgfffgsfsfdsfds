@@ -224,8 +224,6 @@ void StoreDataToFile()
 	}
 	
 	fclose(fp);
-	puts("리스트 저장");
-	system("pause");
 }
 
 void LoadDataFromFile()
@@ -286,7 +284,7 @@ void ChangePhoneData()
 
 		printf("변경할 전화번호는?");
 		gets(edittothis);
-		strcpy(phoneList[editindex[index]], edittothis);
+		strcpy(&(phoneList[editindex[index]]->phoneNum), edittothis);
 		
 		puts("수정완료");
 		
@@ -301,14 +299,14 @@ void ChangePhoneData()
 			printf("수정대상번호: %d\n", i + 1);
 			ShowPhoneInfoByPtr(phoneList[editindex[i]]);
 		}
-		fputs("삭제대상 선택: ", stdout);
+		fputs("수정대상 선택: ", stdout);
 		scanf("%d", &edittarget);
 		edittarget--;//index로 쓰기 위함
 		while (getchar() != '\n');
 
 		printf("변경할 전화번호는?");
 		gets(edittothis);
-		strcpy(phoneList[editindex[edittarget]], edittothis);
+		strcpy(&(phoneList[editindex[edittarget]]->phoneNum), edittothis);
 
 		puts("수정완료");
 		return;
