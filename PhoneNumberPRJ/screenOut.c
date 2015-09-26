@@ -21,8 +21,9 @@ void ShowMenu(void)
 	printf("1. 전화번호 입력\n");
 	printf("2. print all data\n");
 	printf("3. search\n");
-	printf("4. delete\n");
-	printf("5. Quit\n");
+	printf("4. edit\n");
+	printf("5. delete\n");
+	printf("6. Quit\n");
 	//printf("자료 총수: %d\n", numOfData);
 	printf("---------------------\n");
 	printf("SELECT >> ");

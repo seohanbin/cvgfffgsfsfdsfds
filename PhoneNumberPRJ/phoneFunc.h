@@ -16,7 +16,7 @@ void SearchData();
 void DeleteData();
 void StoreDataToFile();
 void LoadDataFromFile();
-
+void ChangePhoneData();
 
 
 #endif

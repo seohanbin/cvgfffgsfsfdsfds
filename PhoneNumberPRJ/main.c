@@ -21,7 +21,7 @@ Last modified 2015
 #include "phoneFunc.h"
 
 
-enum{INPUT=1, SHOWALL, SEARCH, DELETE, QUIT};
+enum{INPUT=1, SHOWALL, SEARCH, EDIT, DELETE, QUIT};
 
 /* function : int main (void)
 role : User selection process
@@ -53,6 +53,11 @@ int main(void)
 
 		case SEARCH:
 			SearchData();
+			system("pause");
+			break;
+
+		case EDIT:
+			ChangePhoneData();
 			system("pause");
 			break;
 

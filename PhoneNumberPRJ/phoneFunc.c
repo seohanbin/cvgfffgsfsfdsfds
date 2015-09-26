@@ -253,4 +253,71 @@ void LoadDataFromFile()
 	system("pause");
 }
 
+/*fn 
+role
+return
+*/
+void ChangePhoneData()
+{
+	int i = 0;
+
+	int editindex[LIST_NUM];
+	int index = 0;
+	int edittarget;
+	char edittothis[NAME_LEN];
+
+	char nameforsearch[NAME_LEN];
+	printf("수정할 이름: ");
+	gets(nameforsearch);
+
+	for (i = 0; i < numOfData; i++)
+	{
+		if (strcmp(nameforsearch, phoneList[i]->name) == 0)
+		{
+			editindex[index] = i;
+			index++;
+		}
+	}
+	index--;//1개일때 마지막 인덱스를 최초(0) 인덱스로
+
+	if (index == 0)//결과1개
+	{
+		phoneList[editindex[index]];//수정대상
+
+		printf("변경할 전화번호는?");
+		gets(edittothis);
+		strcpy(phoneList[editindex[index]], edittothis);
+		
+		puts("수정완료");
+		
+		return;
+	}
+
+	else if (index > 0)//결과 다수
+	{
+
+		for (i = 0; i <= index; i++)
+		{
+			printf("수정대상번호: %d\n", i + 1);
+			ShowPhoneInfoByPtr(phoneList[editindex[i]]);
+		}
+		fputs("삭제대상 선택: ", stdout);
+		scanf("%d", &edittarget);
+		edittarget--;//index로 쓰기 위함
+		while (getchar() != '\n');
+
+		printf("변경할 전화번호는?");
+		gets(edittothis);
+		strcpy(phoneList[editindex[edittarget]], edittothis);
+
+		puts("수정완료");
+		return;
+	}
+	else//결과 없음
+	{
+		puts("해당이름없음");
+		return;
+	}
+}
+
 /* end of file */
